@@ -7,11 +7,14 @@
 #### 為什麼需要 Knowledge Distillation？
 大型模型通常：準確率高、推理能力強。但是：很耗 GPU、記憶體需求大、回應速度較慢、成本昂貴。<br>可能只損失一些精度，但：推論速度提升數倍、佔用記憶體大幅下降、更容易部署於邊緣設備。
 
+#### Knowledge Distillation 流程
+- Step 1：訓練大型 Teacher Model
+- Step 2：Teacher 產生結果
+- Step 3：Student 模仿 Teacher
+- Step 4：得到小型模型
 
-
-
-
-
+#### 與量化（Quantization）的差別
+Quantization
 
 
 
