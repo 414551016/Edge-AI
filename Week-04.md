@@ -75,9 +75,21 @@ Prompt：請說明本教學重點內容：及你的看法，最後以250字內�
   <img src="./Lecture/EdgeAI_lec4/EAI_lec4_page-0008.jpg" width="50%">
 </div>
 
+主題聚焦於影響吞吐量（Throughput）的關鍵因素與公式拆解。
 - 本教學重點內容：
+  - 推論吞吐量拆解（Inference Throughput）：
+    - 每秒推論次數（Inferences / second）等於「每秒運算次數（operations / seconds）」乘上「每次推論所需運算次數的倒數（1 / (operations / inference)）」。
+    - 前者由 DNN 硬體與模型 共同決定，後者由 DNN 模型 本身決定。
+  - 硬體每秒運算次數公式（Operations / seconds）：
+    - 由系統中多個處理單元（Processing Element, PE）構成，PE 為執行單一 MAC（乘加運算）的基礎核心。
+    - 運算公式為：$\left(\frac{1}{\text{cycles / operation}} \times \frac{\text{cycle}}{\text{second}}\right) \times \text{number of PEs} \times \text{utilization of PEs}$。
+    - 單一 PE 峰值吞吐量：每運算週期數與時脈頻率的組合。
+    - 平行度（Amount of parallelism）：PE 的數量。
+    - 利用率（Utilization of PEs）：因架構無法完美發揮 PEs 效能所導致的衰減。
 - 個人看法與分析：
+  <br>這頁投影片切中了 AI 加速器設計最核心的矛盾——理論峰值（Peak Performance）不等於實際效能（Realized Performance）。許多晶片廠商宣稱擁有數千個 PEs、高達數十 TOPS 的算力，但實際執行深度學習模型時，吞吐量卻大打折扣。關鍵就在於公式最後一項 PE 利用率（Utilization）。若記憶體頻寬不足（Memory Wall）或資料排程（Dataflow）設計不佳，導致 PEs 經常處於等待資料的閒置狀態（Stall），整體吞吐量就會急劇下降。因此，優化邊緣 AI 加速器的核心在於提升 PE 利用率與優化資料流，而非盲目堆疊 PE 數量。
 - 總結：
+  <br>本頁課程解析影響邊緣 AI 加速器吞吐量（每秒推論次數）的數學公式與關鍵因子。吞吐量取決於模型複雜度、單一 PE 峰值效能、PE 平行數量以及 PE 利用率。個人認為，硬體設計不能僅盲目追求堆疊 PE 數量或提升時脈，若資料流與記憶體頻寬不足導致 PE 閒置，利用率下降將嚴重拖累實際效能。因此，優化記憶體架構與提高 PE 利用率，才是提升邊緣端 AI 吞吐量的核心關鍵。
 
 ## slide：9
 <div align="left" >
